@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:icon_shadow/icon_shadow.dart';
 
 
 class IconContent extends StatelessWidget {
-  IconContent({@required this.icons, this.label})
+  IconContent({@required this.icons, this.label});
 
-  final IconData icons;
-  final String label;
+    final IconData icons;
+    final String label;
 
 
   @override
@@ -13,8 +14,11 @@ class IconContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icons, size:60),
-
+          Icon(
+            icons,
+            color: Colors.black,
+            size: 100.0,
+          ),
         SizedBox(
           height: 10,
         ),
@@ -22,10 +26,10 @@ class IconContent extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 20,
-            color: Color(0xFF8D8098),
+            color: Colors.black,
           ),
         )
-      ],
+      ]
     );
   }
 }
