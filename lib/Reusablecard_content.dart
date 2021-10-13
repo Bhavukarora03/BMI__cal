@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/input_page.dart';
+import 'package:flutter/gestures.dart';
 
 class ReusableCard extends StatelessWidget {
   ReusableCard({@required this.colour, this.cardProperties, this.gestureDec});
@@ -30,6 +30,25 @@ class ReusableCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({this.iconInButton, this.onPressed});
+  final IconData iconInButton;
+  final Function onPressed;
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onPressed,
+      shape: CircleBorder(),
+      fillColor: Colors.black,
+      elevation: 10.0,
+      constraints: BoxConstraints.expand(width: 45, height: 45),
+      child: Icon(iconInButton,size: 10,),
     );
   }
 }

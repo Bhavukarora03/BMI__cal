@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/Reusablecard_content.dart';
 import 'package:bmi_calculator/Icon_content.dart';
 import 'package:bmi_calculator/Constants.dart';
+import 'Result.dart';
+
 
 class InputPage extends StatefulWidget {
   @override
@@ -123,18 +125,36 @@ class _InputPageState extends State<InputPage> {
                         'WEIGHT',
                         style: labelTextStyle,
                       ),
+                      Text('(in Kgs)',style: TextStyle(fontSize: 16,color: Colors.black54)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        weightValue.toString(),
+                        style: KboldTextstyle,
+                      ),
                       SizedBox(
                         height: 10,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                         children: [
-                          Text(
-                            weightValue.toString(),
-                            style: KboldTextstyle,
+                          RoundIconButton(
+                            iconInButton: FontAwesomeIcons.plus,
+                              onPressed: (){setState(() {
+                                weightValue++;
+                              });}
                           ),
+
+                          RoundIconButton(
+                            iconInButton: FontAwesomeIcons.minus,
+                              onPressed: (){setState(() {
+                                weightValue++;
+                              });}
+                          )
                         ],
-                      )
+                      ),
                     ],
                   ),
                   colour: KcontainerColor,
@@ -152,18 +172,34 @@ class _InputPageState extends State<InputPage> {
                       SizedBox(
                         height: 10,
                       ),
+                      Text(
+                        age.toString(),
+                        style: KboldTextstyle,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                         children: [
-                          Text(
-                            age.toString(),
-                            style: KboldTextstyle,
+                          RoundIconButton(
+                            iconInButton: FontAwesomeIcons.plus,
+                            onPressed: (){setState(() {
+                              age++;
+                            });}
                           ),
-                          Row(
-                            children: [],
+
+                          RoundIconButton(
+                            iconInButton: FontAwesomeIcons.minus,
+                            onPressed: (){
+                              setState(() {
+                               age--;
+                              });
+                            },
                           )
                         ],
-                      )
+                      ),
                     ],
                   ),
                   colour: KcontainerColor,
@@ -171,25 +207,29 @@ class _InputPageState extends State<InputPage> {
               )
             ],
           )),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            width: 400,
-            height: KbottomContainerHeight,
-            child: Center(
-              child: Text(
-                'CALCULATE',
-                style: TextStyle(color: Colors.white),
+          GestureDetector( onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Result()));
+          },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+              width: 400,
+              height: KbottomContainerHeight,
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(15),
-              //   gradient: LinearGradient(
-              //   colors: [Colors., Colors.pink],
-              //   begin: Alignment.topLeft,
-              //   end: Alignment.bottomRight,
-              //   stops: [0, 1],
-              // ),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(15),
+                //   gradient: LinearGradient(
+                //   colors: [Colors., Colors.pink],
+                //   begin: Alignment.topLeft,
+                //   end: Alignment.bottomRight,
+                //   stops: [0, 1],
+                // ),
+              ),
             ),
           ),
         ],
@@ -197,3 +237,5 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
+
+

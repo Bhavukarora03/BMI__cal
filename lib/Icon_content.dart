@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/Constants.dart';
+import 'package:icon_shadow/icon_shadow.dart';
+
 
 class IconContent extends StatelessWidget {
   IconContent({@required this.icons, this.label});
 
-  final IconData icons;
-  final String label;
+    final IconData icons;
+    final String label;
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          icons,
-          size: 60,
-          color: Colors.black,
-        ),
+          Icon(
+            icons,
+            color: Colors.black,
+            size: 100.0,
+          ),
         SizedBox(
           height: 10,
         ),
         Text(
           label,
-          style: labelTextStyle,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+          ),
         )
-      ],
+      ]
     );
   }
 }
