@@ -12,3 +12,4 @@ const KboldTextstyle =
     TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.black);
 
 enum Kgender { Male, Female }
+

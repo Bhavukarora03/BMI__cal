@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/Result.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -6,8 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/Reusablecard_content.dart';
 import 'package:bmi_calculator/Icon_content.dart';
 import 'package:bmi_calculator/Constants.dart';
-import 'Result.dart';
-
+import 'package:bmi_calculator/Functionality.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -89,23 +89,24 @@ class _InputPageState extends State<InputPage> {
                               children: [
                                 SliderTheme(
                                   data: SliderTheme.of(context).copyWith(
-                                      // add slider properties in future
-                                      ),
+                                    // add slider properties in future
+                                  ),
                                   child: Slider(
                                     value: heightValue.toDouble(),
-                                    min: 100,
-                                    max: 200,
+                                    min: 120.0,
+                                    max: 220.0,
                                     activeColor: Colors.black,
                                     onChanged: (double newValue) {
                                       setState(() {
-                                        heightValue = newValue.round();
+                                        heightValue = newValue.toInt();
                                       });
                                     },
                                   ),
                                 ),
                               ],
                             ),
-                          ])
+                          ],),
+
                     ],
                   ),
                   colour: KcontainerColor,
@@ -125,7 +126,9 @@ class _InputPageState extends State<InputPage> {
                         'WEIGHT',
                         style: labelTextStyle,
                       ),
-                      Text('(in Kgs)',style: TextStyle(fontSize: 16,color: Colors.black54)),
+                      Text('(in Kgs)',
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.black54)),
                       SizedBox(
                         height: 10,
                       ),
@@ -138,21 +141,21 @@ class _InputPageState extends State<InputPage> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                         children: [
                           RoundIconButton(
-                            iconInButton: FontAwesomeIcons.plus,
-                              onPressed: (){setState(() {
-                                weightValue++;
-                              });}
-                          ),
-
+                              iconInButton: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  weightValue++;
+                                });
+                              }),
                           RoundIconButton(
-                            iconInButton: FontAwesomeIcons.minus,
-                              onPressed: (){setState(() {
-                                weightValue++;
-                              });}
-                          )
+                              iconInButton: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  weightValue--;
+                                });
+                              })
                         ],
                       ),
                     ],
@@ -181,20 +184,19 @@ class _InputPageState extends State<InputPage> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                         children: [
                           RoundIconButton(
-                            iconInButton: FontAwesomeIcons.plus,
-                            onPressed: (){setState(() {
-                              age++;
-                            });}
-                          ),
-
+                              iconInButton: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              }),
                           RoundIconButton(
                             iconInButton: FontAwesomeIcons.minus,
-                            onPressed: (){
+                            onPressed: () {
                               setState(() {
-                               age--;
+                                age--;
                               });
                             },
                           )
@@ -207,35 +209,26 @@ class _InputPageState extends State<InputPage> {
               )
             ],
           )),
-          GestureDetector( onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Result()));
-          },
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
-              width: 400,
-              height: KbottomContainerHeight,
-              child: Center(
-                child: Text(
-                  'CALCULATE',
-                  style: TextStyle(color: Colors.white),
+          BottomButton(
+            bottomButton: () {
+              CalBrain calc =
+                  new CalBrain(height: heightValue, weight: weightValue);
+
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => ReCalculate(
+                    score: calc.calculateBmi(),
+                    bmiText: calc.results(),
+                    quoteToWorkout: calc.quotesSheesh(),
+                  ),
                 ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(15),
-                //   gradient: LinearGradient(
-                //   colors: [Colors., Colors.pink],
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   stops: [0, 1],
-                // ),
-              ),
-            ),
+              );
+            },
+            calText: 'CALCULATE',
           ),
         ],
       ),
     );
   }
 }
-
-
